@@ -57,6 +57,7 @@
     <Compile Include="TokenScanner\ScannerPatterns\LineBreakPattern.cs" />
     <Compile Include="TokenScanner\ScannerPatterns\TimePattern.cs" />
     <Compile Include="TokenScanner\Token.cs" />
+    <Compile Include="TokenScanner\TokenQueue.cs" />
     <Compile Include="TokenScanner\TokenType.cs" />
   </ItemGroup>
   <ItemGroup />

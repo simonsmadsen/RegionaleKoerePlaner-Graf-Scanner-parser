@@ -12,7 +12,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             TriggerChar = "#";
         }
 
-        public bool CheckPattern(Queue<char> input, List<Token> tokens, List<string> errorList)
+        public bool CheckPattern(Queue<char> input, TokenQueue tokens, List<string> errorList)
         {
             if (! isTriggerChar(input.Peek())) 
                 return false;
@@ -22,7 +22,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             {
                 koereplanNo += input.Dequeue();
             }
-            tokens.Add(new Token(koereplanNo,TokenType.KoreplanNo));
+            tokens.Add(new Token(koereplanNo, TokenType.KoreplanNo));
             return true;
         }
 

@@ -55,7 +55,6 @@ namespace RegionaleKorePlaner
             scanner.Add(new LineBreakPattern());
             scanner.Add(new TimePattern());
             scanner.Scan();
-            List<Token> tokens = scanner.Tokens;
             scanner.Print();
 
             if (scanner.Errors.Count != 0)
@@ -67,19 +66,23 @@ namespace RegionaleKorePlaner
                 }               
             }
 
-            //Scanner skal retunere en Queue
-            Queue<Token> qTokens = new Queue<Token>();
-            foreach (Token token in tokens)
-            {
-                qTokens.Enqueue(token);
-            }
-
-            Parser parser = new Parser(qTokens);
+            Parser parser = new Parser(scanner.Tokens);
             parser.Parse();
             
             // Debug og se det virker! :)
             RegionaleKorePlaner.Regionskoereplan.Regionskoereplan regionskoereplan = parser.Regionskoereplan;
-            
+
+            Scanner scanner2 = new Scanner("RKP.txt");
+            scanner2.Add(new CityPattern());
+            scanner2.Add(new KoreplanNoPattern());
+            scanner2.Add(new LineBreakPattern());
+            scanner2.Add(new TimePattern());
+            Parser parser2 = new Parser(scanner2);
+            parser2.Parse();
+
+            // Debug og se det virker! :)
+            RegionaleKorePlaner.Regionskoereplan.Regionskoereplan regionskoereplan2 = parser2.Regionskoereplan;
+
             Console.ReadKey();
         }
     }

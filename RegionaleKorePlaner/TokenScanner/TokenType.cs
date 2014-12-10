@@ -7,6 +7,6 @@ namespace RegionaleKorePlaner.TokenScanner
 {
     public enum TokenType
     {
-        City,KoreplanNo,Time
+        City,KoreplanNo,Time,End
     }
 }

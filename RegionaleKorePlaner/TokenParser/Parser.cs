@@ -13,6 +13,7 @@ namespace RegionaleKorePlaner.TokenParser
     public class Parser
     {
         private Queue<Token> tokens;
+        private Scanner scanner;
         private TokenType expectedType;
         public Regionskoereplan.Regionskoereplan Regionskoereplan;
         private object currentObject;
@@ -25,9 +26,42 @@ namespace RegionaleKorePlaner.TokenParser
             currentObject = Regionskoereplan;
         }
 
+        public Parser(Scanner scanner)
+        {
+            this.scanner = scanner;
+            this.scanner.Tokens.TokenAdded += tokenAdded;
+            this.tokens = new Queue<Token>();
+            expectedType = TokenType.KoreplanNo;
+            Regionskoereplan = new Regionskoereplan.Regionskoereplan();
+            currentObject = Regionskoereplan;
+        }
+
+        private void tokenAdded(Token token)
+        {
+            tokens.Enqueue(token);
+            doParse();
+        }  
+
         public void Parse()
         {
+            if (scanner != null)
+            {
+                scanner.Scan();
+            }
+            else
+            {
+                doParse();   
+            }      
+        }
+
+        private void doParse()
+        {
             if (tokens.Count == 0)
+            {
+                return;
+            }
+
+            if (tokens.Peek().type == TokenType.End)
             {
                 symanticCheck();
                 return;
@@ -43,25 +77,25 @@ namespace RegionaleKorePlaner.TokenParser
                         currentObject = korePlan;
                         break;
                     case TokenType.City:
-                        Afgang afgang = new Afgang((KorePlan)currentObject,tokens.Dequeue().value);
+                        Afgang afgang = new Afgang((KorePlan)currentObject, tokens.Dequeue().value);
                         ((KorePlan)currentObject).Afgange.Add(afgang);
                         currentObject = afgang;
                         break;
                     case TokenType.Time:
-                        ((Afgang) currentObject).time = tokens.Dequeue().value;
-                        currentObject = ((Afgang) currentObject).koreplan;
+                        ((Afgang)currentObject).time = tokens.Dequeue().value;
+                        currentObject = ((Afgang)currentObject).koreplan;
                         break;
                 }
                 setNextExpectedType();
-                Parse();
+                doParse();
             }
             goToNextKoreplanNo();
-            Parse();
+            doParse();
         }
 
         private void goToNextKoreplanNo()
         {
-            while (tokens.Count != 0 && tokens.Peek().type != TokenType.KoreplanNo)
+            while (tokens.Count != 0 && tokens.Peek().type != TokenType.End && tokens.Peek().type != TokenType.KoreplanNo)
             {
                 tokens.Dequeue();
             }

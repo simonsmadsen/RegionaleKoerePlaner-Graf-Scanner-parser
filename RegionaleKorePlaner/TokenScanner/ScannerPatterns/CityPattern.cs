@@ -12,7 +12,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             TriggerChar = "[a-z]";
         }
 
-        public bool CheckPattern(Queue<char> input, List<Token> tokens, List<string> errorList)
+        public bool CheckPattern(Queue<char> input, TokenQueue tokens, List<string> errorList)
         {
             if (! isTriggerChar(input.Peek()))
                 return false;

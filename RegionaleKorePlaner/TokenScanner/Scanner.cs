@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using RegionaleKorePlaner.TokenScanner.ScannerPatterns;
 
@@ -11,14 +12,14 @@ namespace RegionaleKorePlaner.TokenScanner
     {
         private List<IScannerPattern> scannerPatterns;
         private Queue<char> input;
-        public List<Token> Tokens { get; private set; }
+        public TokenQueue Tokens { get; private set; }
         public List<string> Errors { get; private set; }
 
         public Scanner(string filename)
         {
             scannerPatterns = new List<IScannerPattern>();
             this.input = new Queue<char>(System.IO.File.ReadAllText(@"C:\temp\"+filename));
-            Tokens = new List<Token>();
+            Tokens = new TokenQueue();
             Errors = new List<string>();
         }
 
@@ -49,6 +50,7 @@ namespace RegionaleKorePlaner.TokenScanner
                     input.Dequeue();
                 }            
             }
+            Tokens.Add(new Token("none",TokenType.End));
         }
 
         public bool Add(IScannerPattern scannerPattern)

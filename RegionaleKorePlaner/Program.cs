@@ -90,6 +90,17 @@ namespace RegionaleKorePlaner
             // Debug og se det virker! :)
             RegionaleKorePlaner.Regionskoereplan.Regionskoereplan regionskoereplan2 = parser2.Regionskoereplan;
 
+            // Printer og ser om det virker.
+            foreach (RegionaleKorePlaner.Regionskoereplan.KorePlan koreplan in regionskoereplan2.Koereplan)
+            {
+                Console.WriteLine("- Køre Plan- --");
+                Console.WriteLine("#"+koreplan.No);
+                foreach (RegionaleKorePlaner.Regionskoereplan.Afgang afgang in koreplan.Afgange)
+                {
+                    Console.WriteLine(afgang.city + " " + afgang.time);
+                }
+            }
+
             Console.ReadKey();
         }
     }

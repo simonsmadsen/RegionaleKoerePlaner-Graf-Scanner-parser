@@ -65,17 +65,17 @@ namespace RegionaleKorePlaner.TokenParser
                 {
                     case TokenType.KoreplanNo:
                         KorePlan korePlan = new KorePlan(tokens.Dequeue().value);
-                        ((Regionskoereplan.Regionskoereplan)currentObject).Koereplan.Add(korePlan);
+                        ((Regionskoereplan.Regionskoereplan) currentObject).Koereplan.Add(korePlan);
                         currentObject = korePlan;
                         break;
                     case TokenType.City:
-                        Afgang afgang = new Afgang((KorePlan)currentObject, tokens.Dequeue().value);
-                        ((KorePlan)currentObject).Afgange.Add(afgang);
+                        Afgang afgang = new Afgang((KorePlan) currentObject, tokens.Dequeue().value);
+                        ((KorePlan) currentObject).Afgange.Add(afgang);
                         currentObject = afgang;
                         break;
                     case TokenType.Time:
-                        ((Afgang)currentObject).time = tokens.Dequeue().value;
-                        currentObject = ((Afgang)currentObject).koreplan;
+                        ((Afgang) currentObject).time = tokens.Dequeue().value;
+                        currentObject = ((Afgang) currentObject).koreplan;
                         break;
                 }
                 // Sætter en ny forventet type
@@ -83,10 +83,14 @@ namespace RegionaleKorePlaner.TokenParser
                 // Kalder do Parse, for at parse den næste i køen
                 doParse();
             }
-            // Starter forfra, med at forvente koreplan no
-            goToNextKoreplanNo();
-            // Kalder do Parse, for at parse den næste i køen
-            doParse();
+            else
+            {
+                // Starter forfra, med at forvente koreplan no
+                goToNextKoreplanNo();
+                // Kalder do Parse, for at parse den næste i køen
+                doParse(); 
+            }
+          
         }
 
         private void goToNextKoreplanNo()

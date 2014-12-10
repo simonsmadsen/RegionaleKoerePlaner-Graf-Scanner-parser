@@ -19,7 +19,6 @@ namespace RegionaleKorePlaner.TokenParser
             Regionskoereplan = new Regionskoereplan.Regionskoereplan();
             currentObject = Regionskoereplan;
         }
-
         public Parser(Scanner scanner)
         {
             this.scanner = scanner;
@@ -39,8 +38,10 @@ namespace RegionaleKorePlaner.TokenParser
         public void Parse()
         {
             if (scanner != null)
+                // Starter scanner, som så trigger tokenAdded metoden til at parse.
                 scanner.Scan();
             else
+                // Parser token køen.
                 doParse();        
         }
 
@@ -61,25 +62,12 @@ namespace RegionaleKorePlaner.TokenParser
             // Tjekker om den første i køen er den forventede type
             if (tokens.Peek().type == expectedType)
             {
-                switch (expectedType)
-                {
-                    case TokenType.KoreplanNo:
-                        KorePlan korePlan = new KorePlan(tokens.Dequeue().value);
-                        ((Regionskoereplan.Regionskoereplan) currentObject).Koereplan.Add(korePlan);
-                        currentObject = korePlan;
-                        break;
-                    case TokenType.City:
-                        Afgang afgang = new Afgang((KorePlan) currentObject, tokens.Dequeue().value);
-                        ((KorePlan) currentObject).Afgange.Add(afgang);
-                        currentObject = afgang;
-                        break;
-                    case TokenType.Time:
-                        ((Afgang) currentObject).time = tokens.Dequeue().value;
-                        currentObject = ((Afgang) currentObject).koreplan;
-                        break;
-                }
+                // Tager sig af det øverste token
+                parseToken(tokens.Dequeue());
+               
                 // Sætter en ny forventet type
                 setNextExpectedType();
+
                 // Kalder do Parse, for at parse den næste i køen
                 doParse();
             }
@@ -91,6 +79,27 @@ namespace RegionaleKorePlaner.TokenParser
                 doParse(); 
             }
           
+        }
+        //Opretter/Ændre model ud fra token.
+        private void parseToken(Token token)
+        {
+            switch (expectedType)
+            {
+                case TokenType.KoreplanNo:
+                    KorePlan korePlan = new KorePlan(tokens.Dequeue().value);
+                    ((Regionskoereplan.Regionskoereplan)currentObject).Koereplan.Add(korePlan);
+                    currentObject = korePlan;
+                    break;
+                case TokenType.City:
+                    Afgang afgang = new Afgang((KorePlan)currentObject, tokens.Dequeue().value);
+                    ((KorePlan)currentObject).Afgange.Add(afgang);
+                    currentObject = afgang;
+                    break;
+                case TokenType.Time:
+                    ((Afgang)currentObject).time = tokens.Dequeue().value;
+                    currentObject = ((Afgang)currentObject).koreplan;
+                    break;
+            }
         }
 
         private void goToNextKoreplanNo()
@@ -109,6 +118,7 @@ namespace RegionaleKorePlaner.TokenParser
             // Check symantic
         }
 
+        // Sætter den næste forventet type token.
         private void setNextExpectedType()
         {
             switch (expectedType)

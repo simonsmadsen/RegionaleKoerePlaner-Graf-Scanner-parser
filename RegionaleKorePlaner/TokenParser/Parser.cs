@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using RegionaleKorePlaner.Regionskoereplan;
 using RegionaleKorePlaner.TokenScanner;
-using RegionaleKorePlaner.TokenScanner.ScannerPatterns;
 
 namespace RegionaleKorePlaner.TokenParser
 {
@@ -45,28 +39,26 @@ namespace RegionaleKorePlaner.TokenParser
         public void Parse()
         {
             if (scanner != null)
-            {
                 scanner.Scan();
-            }
             else
-            {
-                doParse();   
-            }      
+                doParse();        
         }
 
         private void doParse()
         {
+            // Hvis der ikke er tokens venter vi på flere fra scanneren.
             if (tokens.Count == 0)
             {
                 return;
             }
-
+            // Der er ikke flere tokens, 
             if (tokens.Peek().type == TokenType.End)
             {
                 symanticCheck();
                 return;
             }
 
+            // Tjekker om den første i køen er den forventede type
             if (tokens.Peek().type == expectedType)
             {
                 switch (expectedType)
@@ -86,15 +78,20 @@ namespace RegionaleKorePlaner.TokenParser
                         currentObject = ((Afgang)currentObject).koreplan;
                         break;
                 }
+                // Sætter en ny forventet type
                 setNextExpectedType();
+                // Kalder do Parse, for at parse den næste i køen
                 doParse();
             }
+            // Starter forfra, med at forvente koreplan no
             goToNextKoreplanNo();
+            // Kalder do Parse, for at parse den næste i køen
             doParse();
         }
 
         private void goToNextKoreplanNo()
         {
+            // Fjerner fra køen indtil den er tom, der er et endtoken eller token er et køreplans no.
             while (tokens.Count != 0 && tokens.Peek().type != TokenType.End && tokens.Peek().type != TokenType.KoreplanNo)
             {
                 tokens.Dequeue();
@@ -105,7 +102,7 @@ namespace RegionaleKorePlaner.TokenParser
 
         private void symanticCheck()
         {
-            
+            // Check symantic
         }
 
         private void setNextExpectedType()

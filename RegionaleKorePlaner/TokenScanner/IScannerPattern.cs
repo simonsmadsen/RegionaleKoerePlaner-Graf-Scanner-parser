@@ -8,6 +8,6 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
     {
         string TriggerChar { get; }
 
-        bool CheckPattern(Queue<char> input, List<string> tokens,List<string> errors);
+        bool CheckPattern(Queue<char> input, List<Token> tokens,List<string> errors);
     }
 }

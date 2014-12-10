@@ -3,3 +3,8 @@
 \\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKorePlaner\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.csprojResolveAssemblyReference.cache
 \\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKorePlaner\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.exe
 \\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKorePlaner\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.pdb
+\\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKoerePlaner-Graf-Scanner-parser\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.exe
+\\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKoerePlaner-Graf-Scanner-parser\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.pdb
+\\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKoerePlaner-Graf-Scanner-parser\RegionaleKorePlaner\obj\Debug\RegionaleKorePlaner.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKoerePlaner-Graf-Scanner-parser\RegionaleKorePlaner\bin\Debug\RegionaleKorePlaner.exe
+\\vmware-host\Shared Folders\simonmadsen On My Mac\Skole\3. semester\RegionaleKorePlaner\RegionaleKoerePlaner-Graf-Scanner-parser\RegionaleKorePlaner\bin\Debug\RegionaleKorePlaner.pdb

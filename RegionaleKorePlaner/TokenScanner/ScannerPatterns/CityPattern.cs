@@ -12,7 +12,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             TriggerChar = "[a-z]";
         }
 
-        public bool CheckPattern(Queue<char> input, List<string> tokens, List<string> errorList)
+        public bool CheckPattern(Queue<char> input, List<Token> tokens, List<string> errorList)
         {
             if (! isTriggerChar(input.Peek()))
                 return false;
@@ -22,7 +22,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             {
                 city += input.Dequeue();
             }
-            tokens.Add(city);
+            tokens.Add(new Token(city, TokenType.City));
             return true;
         }
 

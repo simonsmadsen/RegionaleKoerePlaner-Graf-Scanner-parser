@@ -13,7 +13,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             TriggerChar = "[0-2]";
         }
 
-        public bool CheckPattern(Queue<char> input, List<string> tokens, List<string> errorList)
+        public bool CheckPattern(Queue<char> input, List<Token> tokens, List<string> errorList)
         {
             if (!isTriggerChar(input.Peek()))
                 return false;
@@ -55,7 +55,7 @@ namespace RegionaleKorePlaner.TokenScanner.ScannerPatterns
             }
             time += input.Dequeue().ToString();
 
-            tokens.Add(time);
+            tokens.Add(new Token(time,TokenType.Time));
             return true;
         }
 

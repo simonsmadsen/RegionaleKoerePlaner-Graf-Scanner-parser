@@ -11,22 +11,22 @@ namespace RegionaleKorePlaner.TokenScanner
     {
         private List<IScannerPattern> scannerPatterns;
         private Queue<char> input;
-        public List<string> Tokens { get; private set; }
+        public List<Token> Tokens { get; private set; }
         public List<string> Errors { get; private set; }
 
         public Scanner(string filename)
         {
             scannerPatterns = new List<IScannerPattern>();
             this.input = new Queue<char>(System.IO.File.ReadAllText(@"C:\temp\"+filename));
-            Tokens = new List<string>();
+            Tokens = new List<Token>();
             Errors = new List<string>();
         }
 
         public void Print()
         {
-            foreach (string token in Tokens)
+            foreach (Token token in Tokens)
             {
-                Console.WriteLine(token);
+                Console.WriteLine(token.value);
             }
         }
 

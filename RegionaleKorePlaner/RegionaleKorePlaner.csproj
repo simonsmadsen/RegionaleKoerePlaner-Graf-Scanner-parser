@@ -46,13 +46,20 @@
     <Compile Include="Graf\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regionskoereplan\Afgang.cs" />
+    <Compile Include="Regionskoereplan\KorePlan.cs" />
+    <Compile Include="Regionskoereplan\Regionskoereplan.cs" />
+    <Compile Include="TokenParser\Parser.cs" />
     <Compile Include="TokenScanner\Scanner.cs" />
     <Compile Include="TokenScanner\IScannerPattern.cs" />
     <Compile Include="TokenScanner\ScannerPatterns\CityPattern.cs" />
     <Compile Include="TokenScanner\ScannerPatterns\KoreplanNoPattern.cs" />
     <Compile Include="TokenScanner\ScannerPatterns\LineBreakPattern.cs" />
     <Compile Include="TokenScanner\ScannerPatterns\TimePattern.cs" />
+    <Compile Include="TokenScanner\Token.cs" />
+    <Compile Include="TokenScanner\TokenType.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

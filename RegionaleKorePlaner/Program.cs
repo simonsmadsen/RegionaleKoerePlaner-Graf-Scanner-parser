@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using RegionaleKorePlaner.TokenParser;
 using RegionaleKorePlaner.TokenScanner;
 using RegionaleKorePlaner.TokenScanner.ScannerPatterns;
 
@@ -54,7 +55,7 @@ namespace RegionaleKorePlaner
             scanner.Add(new LineBreakPattern());
             scanner.Add(new TimePattern());
             scanner.Scan();
-            List<string> tokens = scanner.Tokens;
+            List<Token> tokens = scanner.Tokens;
             scanner.Print();
 
             if (scanner.Errors.Count != 0)
@@ -65,7 +66,19 @@ namespace RegionaleKorePlaner
                     Console.WriteLine(error);
                 }               
             }
-          
+
+            //Scanner skal retunere en Queue
+            Queue<Token> qTokens = new Queue<Token>();
+            foreach (Token token in tokens)
+            {
+                qTokens.Enqueue(token);
+            }
+
+            Parser parser = new Parser(qTokens);
+            parser.Parse();
+            
+            // Debug og se det virker! :)
+            RegionaleKorePlaner.Regionskoereplan.Regionskoereplan regionskoereplan = parser.Regionskoereplan;
             
             Console.ReadKey();
         }
